@@ -1,0 +1,18 @@
+/*
+Author: Aaron Moss
+Class: Data Structures
+Project #1 Hello World
+Date Due: 23 Jan 2020
+*/
+
+#include <iostream>
+
+//Function to print Hello World 
+void hello_world() {
+  std::cout << "Hello World" << std::endl;
+}
+
+int main() {
+  //Call Hello World function 
+  hello_world();
+}
