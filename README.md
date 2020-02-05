@@ -2,7 +2,7 @@ Project Descriptions:
 
 Project 1:
 
-Create a slightly more advanced version of the classic “Hello World” program. Besides the main function, a separate function should handle printing out the message “Hello World” to the command lineor IDE’s output.
+Create a slightly more advanced version of the classic “Hello World” program. Besides the main function, a separate function should handle printing out the message “Hello World” to the command line or IDE’s output.
 
 Project 2:
 
