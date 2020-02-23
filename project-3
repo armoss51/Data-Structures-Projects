@@ -1,0 +1,56 @@
+/*
+* Author: Aaron Moss
+* Class: Data Structures
+* Project #3
+* Date Due: 26 February 2020
+*/
+
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+//Create struct
+struct inventory {
+	string name;
+	float price;
+	int number;
+};
+
+
+void inv_report() {
+
+	//Create struct array
+	struct inventory products[64];
+
+	//File input
+	ifstream dataFile;
+	dataFile.open("project_03_data.csv");
+
+	if (!dataFile.is_open()) {
+		cout << "Error opening the file." << endl;
+	}
+
+	//Need to read data from .csv file into struct array
+	int index = 0;
+	if (dataFile.is_open()) {
+		while (!dataFile.eof()) {
+			getline(dataFile, products[index].name, ',');
+			index++;
+		}
+	}
+
+	//Close file
+	dataFile.close();
+
+	//Testing stuff **DELETE LATER**
+	cout << products[4].name << endl;
+
+}
+
+
+int main() {
+
+	inv_report();
+
+}
