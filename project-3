@@ -5,52 +5,91 @@
 * Date Due: 26 February 2020
 */
 
-#include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 #include <string>
+#include <vector>
 using namespace std;
+
 
 //Create struct
 struct inventory {
-	string name;
-	float price;
-	int number;
+    string name;
+    double price = 0.0;
+    int number = 0;
 };
 
+ostream& operator<<(ostream& os, const inventory& inv) {
+    return os << inv.name << ", " << inv.price << ", " << inv.number << "\n";
+}
 
 void inv_report() {
+    //Create struct array
+    inventory products[64];
 
-	//Create struct array
-	struct inventory products[64];
+    //File input
+    ifstream dataFile;
+    dataFile.open("project_03_data.csv");
 
-	//File input
-	ifstream dataFile;
-	dataFile.open("project_03_data.csv");
+    //Need to read data from .csv file into struct array
+    int index = 0;
+    int rows = 0;
+    double total = 0.0;
 
-	if (!dataFile.is_open()) {
-		cout << "Error opening the file." << endl;
-	}
+    if (dataFile.is_open()) {
+        for (string line; getline(dataFile, line); index++) {
 
-	//Need to read data from .csv file into struct array
-	int index = 0;
-	if (dataFile.is_open()) {
-		while (!dataFile.eof()) {
-			getline(dataFile, products[index].name, ',');
-			index++;
-		}
-	}
+            // Skip the header row
+            if (index != 0) {
+                istringstream iss(line);
 
-	//Close file
-	dataFile.close();
+                // Vector to hold the values
+                vector<string> substrs;
 
-	//Testing stuff **DELETE LATER**
-	cout << products[4].name << endl;
+                // Split the row by commas into smaller strings
+                for (string temp; getline(iss, temp, ','); ) {
+                    substrs.push_back(temp);
+                }
+
+                //Change the strings into correct struct objects
+                string name = substrs[0];
+                double price = stod(substrs[1]);  // string to double
+                int number = stoi(substrs[2]);    // string to int
+
+                // Index - 1 to skip the first line in the file.
+                products[index - 1] = { name, price, number };
+            }
+        }
+
+        rows = index - 1;
+
+        dataFile.close();
+    }
+    else { // File error testing
+        cout << "Error opening file." << endl;
+        return;
+    }
+
+    //Output inventory list
+    for (int i = 0; i < rows; i++) {
+        cout << products[i].name << ":  $" << products[i].price << endl;
+    }
+
+    cout << "==========" << endl;
+
+    //Calculate and print total value of inventory
+    for (int i = 0; i < rows; i++) {
+        total = total + products[i].price;
+    }
+
+    cout << "$" << total << endl;
+
 
 }
 
-
 int main() {
-
-	inv_report();
-
+    inv_report();
+    return 0;
 }
