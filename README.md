@@ -15,15 +15,27 @@ Create a command line program that reads datafrom atext file into an array of st
 Project 4:
 
 1.Create an empty linked list that holds numbers
+
 2.Print the (empty) list
+
 3.Open the supplied file and read the numbers
+
 4.Push each of these numbers onto the list
+
 5.Print the list
+
 6.Pop each number off of the list–printing the number as it is removed
+
 7.Print the list (hopefully empty)
+
 8.Close and reopen the file
+
 9.Read the file again
+
 10.Enqueue the numbers onto the list
+
 11.Print the list
+
 12.Dequeue each number off of the list – printing each number as it is removed
+
 13.Print the list(hopefully empty)
