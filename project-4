@@ -1,0 +1,138 @@
+/*
+* Author: Aaron Moss
+* Class: Data Structures
+* Project #4
+* Date Due: 12 March 2020
+*/
+
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+using namespace std;
+
+class List {
+private:
+	typedef struct node {
+		int data;
+		node* next;
+	}* nodePtr;
+
+	nodePtr head;
+	nodePtr curr;
+	nodePtr temp;
+
+public:
+	List();
+	void pushNode(int pushData);
+	void popNode(int popData);
+	void printList();
+	void emptyList();
+	
+};
+
+
+List::List() {
+	head = NULL;
+	curr = NULL;
+	temp = NULL;
+}
+
+void List::pushNode(int pushData) {
+	nodePtr n = new node;
+	n->next = NULL;
+	n->data = pushData;
+
+	if (head != NULL) {
+		curr = head;
+		while (curr->next != NULL) {
+			curr = curr->next;
+		}
+		curr->next = n;
+	}
+	else {
+		head = n;
+	}
+}
+
+void List::popNode(int popData) {
+	nodePtr popPtr = NULL;
+	temp = head;
+	curr = head;
+
+	while (curr != NULL && curr->data != popData) {
+		temp = curr;
+		curr = curr->next;
+	}
+
+	if (curr == NULL) {
+		delete popPtr;
+	}
+	else {
+		popPtr = curr;
+		curr = curr->next;
+		temp->next = curr;
+		if (popPtr == head) {
+			head = head->next;
+			temp = NULL;
+		}
+		delete popPtr;
+	}
+}
+
+void List::printList() {
+
+	curr = head;
+	while (curr != NULL) {
+		cout << curr->data << endl;
+		curr = curr->next;
+	}
+}
+
+void List::emptyList() {
+	if (head == NULL) {
+		cout << "Print List:" << endl;
+		cout << "Empty" << endl;
+	}
+}
+
+
+
+void linkedList() {
+	int index;
+
+	List List;
+
+	List.emptyList();
+
+	ifstream dataFile;
+	dataFile.open("project04_data.txt");
+
+	if (dataFile.is_open()) {
+		cout << "\n\nPush numbers onto list..." << endl;
+
+		while (!dataFile.eof()) {
+			
+		}
+
+
+	}
+	else { //File error testing
+		cout << "ERROR: Unable to open file." << endl;
+	}
+
+
+
+
+
+
+
+}
+
+
+
+
+int main() {
+
+	linkedList();
+
+}
